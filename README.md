@@ -1,1 +1,1 @@
-<h1>Chicos Paz y Sosiego, este grupo es de trabajo</h1>
+<h1>Chicos <b>Paz y Sosiego</b>, este grupo es de trabajo</h1>
