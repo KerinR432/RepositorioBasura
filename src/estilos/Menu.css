@@ -1,0 +1,116 @@
+:root {
+  --unsc-light: #d0d4c0;       /* gris verdoso claro para fondo */
+  --unsc-dark: #5a5f50;        /* gris oscuro / metalizado */
+  --unsc-olive: #597859;       /* verde oliva clásico UNSC */
+  --unsc-carrito-bg: #464f40;  /* verde oscuro */
+  --unsc-text: #ffffff;        /* blanco para títulos y iconos */
+  --unsc-hover: #7a8a6e;       /* verde oliva claro para hover */
+  --unsc-border-radius: 0.5rem;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--unsc-light);
+}
+
+.menu div, .menu a, li a {
+  transition: transform var(--unsc-transition-normal) var(--unsc-transition-ease),
+              color var(--unsc-transition-normal) var(--unsc-transition-ease);
+}
+
+.menu div:hover, .menu a:hover, li:hover {
+  transform: scale(1.05);
+}
+
+.menu {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--unsc-olive);
+  padding: 10px 20px;
+  color: var(--unsc-text);
+  gap: 1rem;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: var(--unsc-text);
+}
+
+.total-precio {
+  background-color: var(--unsc-dark);
+  padding: 8px 20px;
+  border-radius: var(--unsc-border-radius);
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  gap: 15px;
+  min-width: 180px;
+  justify-content: center;
+}
+
+.carrito {
+  background-color: var(--unsc-carrito-bg);
+  padding: 8px 16px;
+  border-radius: var(--unsc-border-radius);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.carrito-icon {
+  border-radius: var(--unsc-border-radius);
+  width: 30px;
+  height: 30px;
+  fill: var(--unsc-text);
+  transition: transform 0.4s, background-color 0.4s;
+}
+
+.carrito-icon:hover {
+  transform: scale(1.1);
+  background-color: var(--unsc-hover);
+  box-shadow: 0 0.3rem 0.6rem rgba(0,0,0,0.3);
+}
+
+#productos {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+
+#productos.show {
+  opacity: 1;
+  max-height: 500px; /* suficiente para mostrar todos los elementos */
+}
+
+li {
+  list-style: none;
+  transition: transform 0.5s ease, color 0.3s ease;
+}
+
+li a {
+  text-decoration: none;
+  font-size: 1.1rem;
+  color: var(--unsc-light);
+}
+
+li:hover {
+  transform: scale(1.2);
+}
+
+li a {
+  text-decoration: none;
+  font-size: 1.1rem;
+  color: var(--unsc-dark);
+  transition: color 0.3s ease;
+}
+
+li a:hover {
+  color: var(--unsc-text);
+}

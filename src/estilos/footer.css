@@ -1,0 +1,38 @@
+#footer {
+    box-sizing: border-box;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 95%;
+    border-radius: 1rem;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    background-color: #d0d4c0;
+}
+
+#footer>div {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+#footer>button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #464f40;
+    /* verde oscuro estilo UNSC */
+    color: #ffffff;
+  transition: transform var(--unsc-transition-fast) var(--unsc-transition-ease),
+              background-color var(--unsc-transition-normal) var(--unsc-transition-ease);
+}
+
+
+    #footer>button:hover {
+        transform: scale(1.2);
+
+    }

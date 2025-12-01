@@ -1,0 +1,54 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.Autor-main {
+    display: flex;
+    flex-direction: row;
+    /* fila: imagen a la izquierda, texto a la derecha */
+    flex-wrap: wrap;
+    /* para responsividad en pantallas pequeñas */
+    align-items: flex-start;
+    /* alinear arriba la imagen y texto */
+    justify-content: center;
+    gap: 2rem;
+    /* espacio entre imagen y texto */
+    padding: 2rem;
+}
+
+.imagenLado {
+    flex: 0 0 250px;
+}
+
+.imagenLado>img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+h1 {
+    margin: .3rem;
+    font-size: 2rem;
+    color: white;
+}
+
+h2 {
+    padding: .3rem;
+    font-size: 1.5rem;
+}
+
+.derecha {
+    flex: 1;
+    /* ocupa todo el espacio restante */
+    padding: 1rem;
+}
+
+p {
+    width: 40%;
+    font-size: 1rem;
+    color: white;
+    line-height: 1.5;
+}
