@@ -3,6 +3,7 @@ import '../estilos/Cuerpo.css'
 import { useEffect } from 'react';
 import servicioProductos from '../servicios/servicioProductos';
 import Footer from './Footer';
+import { Link } from 'react-router-dom';
 function Cuerpo({ total, setTotal,producto, setProductos }) {
     //codigo javascript
     const [imagenesUrls, setImageUrls] = useState([])
@@ -32,17 +33,21 @@ function Cuerpo({ total, setTotal,producto, setProductos }) {
             <main className='cards-container'>
 
                 {imagenesUrls.map((img, index) => (
+                     
                     <div className='card' key={index}>
+                    <Link key={index} to="/detalles">
                         <img src={img.url} alt={img.nombre} />
+                    </Link>
                         <h3>{img.nombre}</h3>
                         <p className='card-description'>Un elevador espacial a tu mesa, con la mejor carne de Moa que jamas hayas provado</p>
                         <p className='card-price' >precio: {img.precio}€</p>
+                    
                         <button onClick={() => aumentarCantidad(img)}>Pulsame</button>
 
                     </div>
                 ))}
             </main>
-            <div>
+            <div className='footer'>
             <Footer producto={producto} setProductos={setProductos} setTotal={setTotal} ></Footer>
             </div>
         </>

@@ -1,3 +1,30 @@
+:root {
+    min-height: 100vh;
+  /* Brand Colors */
+  --color-primary: #2EA9A1;       /* UNSC Teal */
+  --color-secondary: #C4A046;     /* Mjolnir Gold */
+  --color-accent-blue: #4AA8FF;   /* Energy Sword Blue */
+  --color-accent-purple: #8240FF; /* Plasma Purple */
+
+  /* Backgrounds */
+  --bg-main: #0E1A2A;         /* Slipspace Navy */
+  --bg-secondary: #1F2E3C;    /* UNSC Steel */
+  --bg-card: #2E3E49;         /* Forerunner Gray */
+
+  /* Text */
+  --text-main: #E8ECF0;
+  --text-secondary: #A7B3BE;
+  --text-dark: #0B0F14;
+
+  /* States */
+  --hover-primary: #39C2B9;
+  --hover-secondary: #D7B25A;
+  --hover-link: #6BC2FF;
+
+  --border-soft: #3C4A56;
+  --shadow-black: rgba(0, 0, 0, 0.2);
+}
+
 body{
     height: 90vh;
 }

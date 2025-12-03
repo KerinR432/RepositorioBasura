@@ -1,47 +1,93 @@
+/*
+Este bloque root es el div donde encapsula toda la app. los colores sacados de IA son para todo texto
+fondos, botones, etc. 
+*/
 :root {
-  --unsc-light: #d0d4c0;       /* gris verdoso claro para fondo */
-  --unsc-dark: #5a5f50;        /* gris oscuro / metalizado */
-  --unsc-olive: #597859;       /* verde oliva clásico UNSC */
-  --unsc-carrito-bg: #464f40;  /* verde oscuro */
-  --unsc-text: #ffffff;        /* blanco para títulos y iconos */
-  --unsc-hover: #7a8a6e;       /* verde oliva claro para hover */
+  /* Brand Colors */
+  --color-primary: #2ea9a1; /* UNSC Teal */
+  --color-secondary: #c4a046; /* Mjolnir Gold */
+  --color-accent-blue: #4aa8ff; /* Energy Sword Blue */
+  --color-accent-purple: #8240ff; /* Plasma Purple */
+
+  /* Backgrounds */
+  --bg-main: #0e1a2a; /* Slipspace Navy */
+  --bg-secondary: #1f2e3c; /* UNSC Steel */
+  --bg-card: #2e3e49; /* Forerunner Gray */
+
+  /* Text */
+  --text-main: #e8ecf0;
+  --text-secondary: #a7b3be;
+  --text-dark: #0b0f14;
+
+  /* States */
+  --hover-primary: #39c2b9;
+  --hover-secondary: #d7b25a;
+  --hover-link: #6bc2ff;
+
+  --border-soft: #3c4a56;
+  --shadow-black: rgba(0, 0, 0, 0.2);
+
+  --unsc-transition-fast: 0.2s;
+  --unsc-transition-normal: 0.3s;
+  --unsc-transition-slow: 0.4s;
+  --unsc-border-radius: 12px;
+  /* verde oliva claro para hover */
   --unsc-border-radius: 0.5rem;
 }
 
+/*
+Aqui ira lo generico y que afecte todo del menu
+*/
+
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--unsc-light);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.menu div, .menu a, li a {
-  transition: transform var(--unsc-transition-normal) var(--unsc-transition-ease),
-              color var(--unsc-transition-normal) var(--unsc-transition-ease);
+
+/*
+le es estamos diciendo que 'a' que hay en el menu se aplique una transcisiones, para que vea bonito el dar click
+*/
+.menu div,
+.menu a,
+li a {
+  transition: transform var(--unsc-transition-normal)
+      var(--unsc-transition-ease),
+    color var(--unsc-transition-normal) var(--unsc-transition-ease);
 }
 
-.menu div:hover, .menu a:hover, li:hover {
+/*
+Aplicamos un 'hover' para que se ejecute estos cambios
+*/
+.menu div:hover,
+.menu a:hover,
+li:hover {
   transform: scale(1.05);
 }
 
+/*
+el menu encapsula todo lo anterior, aqui haremos todo de el layaout
+asi como el color principal del menu
+*/
 .menu {
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--unsc-olive);
+  background-color: var(--bg-secondary);
   padding: 10px 20px;
-  color: var(--unsc-text);
+  color: var(--text-main);
   gap: 1rem;
 }
 
 .logo {
   font-weight: bold;
   font-size: 1.5rem;
-  color: var(--unsc-text);
+  color: var(--text-dark);
 }
 
 .total-precio {
-  background-color: var(--unsc-dark);
+  background-color: var(--bg-card);
   padding: 8px 20px;
   border-radius: var(--unsc-border-radius);
   font-size: 1.1rem;
@@ -53,7 +99,7 @@ body {
 }
 
 .carrito {
-  background-color: var(--unsc-carrito-bg);
+  background-color: var(--color-primary);
   padding: 8px 16px;
   border-radius: var(--unsc-border-radius);
   display: flex;
@@ -67,14 +113,14 @@ body {
   border-radius: var(--unsc-border-radius);
   width: 30px;
   height: 30px;
-  fill: var(--unsc-text);
+  fill: var(--color-accent-blue);
   transition: transform 0.4s, background-color 0.4s;
 }
 
 .carrito-icon:hover {
   transform: scale(1.1);
-  background-color: var(--unsc-hover);
-  box-shadow: 0 0.3rem 0.6rem rgba(0,0,0,0.3);
+  background-color: var(--color-accent-purple);
+  box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.3);
 }
 
 #productos {
@@ -97,7 +143,7 @@ li {
 li a {
   text-decoration: none;
   font-size: 1.1rem;
-  color: var(--unsc-light);
+  color: var(--color-accent-blue);
 }
 
 li:hover {
@@ -107,10 +153,10 @@ li:hover {
 li a {
   text-decoration: none;
   font-size: 1.1rem;
-  color: var(--unsc-dark);
+  color: var(--color-accent-blue);
   transition: color 0.3s ease;
 }
 
 li a:hover {
-  color: var(--unsc-text);
+  color: var(--hover-link);
 }

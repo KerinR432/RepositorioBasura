@@ -7,6 +7,7 @@ import './estilos/App.css'
 import { Routes, Route } from 'react-router-dom';
 
 import Autor from './componentes/Autor';
+import Detalles from './componentes/Detalles';
 function App() {
   //* CODIGO JAVASCRIPT
 
@@ -32,6 +33,7 @@ function App() {
     />
     <Route path="/autor" element={<Autor />} />
     <Route path='/'></Route>
+    <Route path='/detalles' element={<Detalles></Detalles>}></Route>
   </Routes>
 
       {/* <div>

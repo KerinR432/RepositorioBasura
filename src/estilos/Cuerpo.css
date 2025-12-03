@@ -1,53 +1,63 @@
 :root {
-  --unsc-card-bg: #d0d4c0;
-  /* gris verdoso claro */
-  --unsc-card-border: #a0a48f;
-  /* gris oscuro para borde */
-  --unsc-card-text: #333;
-  /* texto principal */
-  --unsc-card-price: #597859;
-  /* verde oliva */
-  --unsc-card-btn: #464f40;
-  /* verde oscuro */
-  --unsc-card-btn-hover: #597859;
-  /* verde oliva */
-  --unsc-card-shadow: rgba(0, 0, 0, 0.15);
+  /* Brand Colors */
+  --color-primary: #2ea9a1; /* UNSC Teal */
+  --color-secondary: #c4a046; /* Mjolnir Gold */
+  --color-accent-blue: #4aa8ff; /* Energy Sword Blue */
+  --color-accent-purple: #8240ff; /* Plasma Purple */
+
+  /* Backgrounds */
+  --bg-main: #0e1a2a; /* Slipspace Navy */
+  --bg-secondary: #1f2e3c; /* UNSC Steel */
+  --bg-card: #2e3e49; /* Forerunner Gray */
+
+  /* Text */
+  --text-main: #e8ecf0;
+  --text-secondary: #a7b3be;
+  --text-dark: #0b0f14;
+
+  /* States */
+  --hover-primary: #39c2b9;
+  --hover-secondary: #d7b25a;
+  --hover-link: #6bc2ff;
+
+  --border-soft: #3c4a56;
+  --shadow-black: rgba(0, 0, 0, 0.2);
   --unsc-transition-fast: 0.2s;
   --unsc-transition-normal: 0.3s;
   --unsc-transition-slow: 0.4s;
-  --unsc-transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
   --unsc-border-radius: 12px;
 }
 
-body {
-  min-height: 100vh;
-}
+
 
 .cards-container {
   display: grid;
+  padding: 10rem;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 50px;
+  gap: 45px;
   justify-content: center;
+  background-color: var(--bg-main);
 }
 
 .card {
-  background-color: var(--unsc-card-bg);
-  border: 1px solid var(--unsc-card-border);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-soft);
   border-radius: var(--unsc-border-radius);
-  box-shadow: 0 2px 8px var(--unsc-card-shadow);
+  box-shadow: 0 2px 8px var(--shadow-black);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 15px;
-  transition: transform var(--unsc-transition-normal) var(--unsc-transition-ease),
+  padding: 10px;
+  transition: transform var(--unsc-transition-normal)
+      var(--unsc-transition-ease),
     box-shadow var(--unsc-transition-normal) var(--unsc-transition-ease);
 }
 
 .card:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 16px var(--unsc-card-shadow);
+  box-shadow: 0 8px 16px var(--shadow-black);
 }
 
 .card img {
@@ -58,32 +68,43 @@ body {
   border-radius: 10px;
 }
 
+
+h3 {
+  color:var(--text-main);
+}
 .card-description {
   font-size: 1rem;
-  color: var(--unsc-card-text);
+  color: var(--text-secondary);
   margin: 15px 0 8px;
 }
 
 .card-price {
   font-weight: bold;
   font-size: 1.2rem;
-  color: var(--unsc-card-price);
+  color: var(--text-dark);
   margin-bottom: 12px;
 }
 
 .card button {
-  background-color: var(--unsc-card-btn);
-  color: var(--unsc-card-text);
+  background-color: var(--color-primary);
+  color: var(--text-main);
   border: none;
   border-radius: var(--unsc-border-radius);
   padding: 10px 20px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color var(--unsc-transition-normal) var(--unsc-transition-ease),
+  transition: background-color var(--color-secondary)
+      var(--unsc-transition-ease),
     transform var(--unsc-transition-fast) var(--unsc-transition-ease);
 }
 
 .card button:hover {
-  background-color: var(--unsc-card-btn-hover);
+  background-color: var(--hover-primary);
   transform: scale(1.05);
+}
+
+
+.footer{
+  height: 100%;
+  width: 100%;
 }
