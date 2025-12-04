@@ -1,0 +1,9 @@
+{
+    "productos": [
+      { "url": "./imagenes/chandal.avif", "nombre": "Chandal UFC", "precio": 166},
+      { "url": "./imagenes/guantes.jpg", "nombre": "Guantes UFC", "precio": 80 },
+      { "url": "./imagenes/bucal.jpg", "nombre": "Bucal Venum", "precio": 15 },
+      { "url": "./imagenes/espinilleras.png", "nombre": "Espinilleras Venum", "precio": 116 }
+
+    ]
+  }

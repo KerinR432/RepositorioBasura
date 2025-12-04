@@ -1,0 +1,88 @@
+/* ===== FORMULARIO ADMIN ===== */
+
+form {
+    width: 100%;
+    max-width: 450px;
+    background-color: #1f1f1f;
+    padding: 25px;
+    padding-right:50px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    margin: 25px auto;
+}
+
+/* Etiquetas */
+form label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #f1c40f;
+}
+
+/* Inputs y textarea */
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background-color: #2b2b2b;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+/* Placeholder */
+form input::placeholder,
+form textarea::placeholder {
+    color: #888;
+}
+
+/* Focus */
+form input:focus,
+form textarea:focus {
+    border-color: #f1c40f;
+    box-shadow: 0 0 6px rgba(241, 196, 15, 0.5);
+}
+
+/* Textarea */
+form textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+/* Botón */
+form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #f1c40f;
+    color: #1a1a1a;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+form button:hover {
+    background-color: #ffa600;
+    color: #fff;
+    transform: scale(1.05);
+    /* agranda la imagen ligeramente */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7), inset 0 0 12px rgba(255, 255, 255, 0.1);
+    /* sombra más intensa al pasar el mouse */
+}
+
+/* Mensajes de error */
+.error {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    margin-top: -10px;
+    margin-bottom: -5px;
+    font-weight: bold;
+}

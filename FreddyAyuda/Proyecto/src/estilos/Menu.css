@@ -1,0 +1,127 @@
+/* ===== MENÚ SUPERIOR ===== */
+.menu-superior {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: #1a1a1a;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.7);
+}
+
+.icono-supermercado {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+}
+
+/* LINKS */
+.menu-links a {
+  color: #f1c40f;
+  margin: 0 15px;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.menu-links a:hover {
+  color: #e74c3c;
+  transition: 0.3s;
+}
+
+/* Carrito */
+.carrito-texto {
+  flex: 1;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.toggle-carrito {
+  background: #f1c40f;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.toggle-carrito:hover {
+  background: #e67e22;
+}
+
+/* Carrito desplegable */
+.carrito-productos {
+  position: absolute;
+  top: 60px;
+  right: 10px; /* escritorio */
+  width: 250px;
+  background: #1f1f1f;
+  color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.7);
+  max-height: 350px;
+  overflow-y: auto;
+  z-index: 2000;
+}
+
+.carrito-productos h4 {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+.carrito-productos ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.carrito-productos li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #333;
+  padding: 8px;
+  margin-bottom: 6px;
+  border-radius: 5px;
+}
+
+.carrito-productos li:last-child {
+  border-bottom: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .menu-superior {
+    padding: 10px 12px;
+  }
+
+  .icono-supermercado {
+    width: 35px;
+    height: 35px;
+  }
+
+  .carrito-texto {
+    font-size: 1.1rem;
+  }
+
+  .toggle-carrito {
+    width: 38px;
+    height: 38px;
+    font-size: 1.5rem;
+  }
+
+  .carrito-productos {
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 55px;
+  }
+}
