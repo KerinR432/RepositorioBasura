@@ -1,30 +1,202 @@
+/* ====================================================== */
+/* 🛡️ 1. VARIABLES GLOBALES (Mantenidas y Reforzadas) 🛡️ */
+/* ====================================================== */
 :root {
-    min-height: 100vh;
   /* Brand Colors */
-  --color-primary: #2EA9A1;       /* UNSC Teal */
-  --color-secondary: #C4A046;     /* Mjolnir Gold */
-  --color-accent-blue: #4AA8FF;   /* Energy Sword Blue */
-  --color-accent-purple: #8240FF; /* Plasma Purple */
+  --color-unsc-teal: #2EA9A1;
+  /* Primary: UNSC Teal */
+  --color-mjolnir-gold: #C4A046;
+  /* Secondary: Mjolnir Gold */
+  --color-accent-blue: #4AA8FF;
+  /* Energy/Interface Blue */
+  --color-error: #FF4A4A;
+  /* Covenant Red/Warning */
 
   /* Backgrounds */
-  --bg-main: #0E1A2A;         /* Slipspace Navy */
-  --bg-secondary: #1F2E3C;    /* UNSC Steel */
-  --bg-card: #2E3E49;         /* Forerunner Gray */
+  --bg-main: #0E1A2A;
+  /* Slipspace Navy */
+  --bg-secondary: #1F2E3C;
+  /* UNSC Steel */
+  --bg-darker: #0B0F14;
+  /* Deep Black */
+  --bg-hologram-card: rgba(46, 62, 73, 0.7);
+  /* Semitransparente con blur */
 
-  /* Text */
-  --text-main: #E8ECF0;
-  --text-secondary: #A7B3BE;
-  --text-dark: #0B0F14;
-
-  /* States */
-  --hover-primary: #39C2B9;
-  --hover-secondary: #D7B25A;
-  --hover-link: #6BC2FF;
-
-  --border-soft: #3C4A56;
-  --shadow-black: rgba(0, 0, 0, 0.2);
+  /* Effects & Motion */
+  --glow-primary: 0 0 15px rgba(46, 169, 161, 0.7);
+  --glow-blue: 0 0 10px rgba(74, 168, 255, 0.5);
+  --ease-unsc: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.4s;
+  --scanline-opacity: 0.015;
 }
 
-body{
-    height: 90vh;
+/* Definiciones de Keyframes (Asegúrate de que existan) */
+@keyframes scanline {
+  /* ... (definición omitida por brevedad, pero debe existir) */
+}
+
+@keyframes backgroundGlitch {
+  /* ... (definición omitida por brevedad, pero debe existir) */
+}
+
+@keyframes initialHUDLoad {
+  /* ... (definición omitida por brevedad, pero debe existir) */
+}
+
+@keyframes textGlitch {
+  /* ... (definición omitida por brevedad, pero debe existir) */
+}
+
+
+/* ====================================================== */
+/* 🛠️ 3. SELECTORES ESPECÍFICOS DE COMPONENTES 🛠️ */
+/* ====================================================== */
+
+/* Contenedor principal de la aplicación */
+.unsc-interface-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  animation: initialHUDLoad 1s var(--ease-unsc) forwards;
+}
+
+/* Área de contenido principal (donde se cargan las rutas) */
+.main-viewport {
+  flex-grow: 1;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  position: relative;
+  /* Borde sutil de la interfaz principal */
+  border-left: 1px solid var(--border-soft);
+  border-right: 1px solid var(--border-soft);
+  box-shadow: var(--glow-primary);
+}
+
+/* Contenedor de transición de ruta (PageWrapper) */
+.page-transition-wrapper {
+  /* Clase que aplica la animación Slipspace Jump */
+  animation: slipspaceIn 0.6s var(--ease-unsc) both;
+}
+
+@keyframes slipspaceIn {
+  /* ... (definición omitida por brevedad, pero debe existir) */
+}
+
+/* --- Componentes de Ruta (Estilo de Panel Táctico) --- */
+
+/* Estilo para el componente <Autor> */
+.autor-panel {
+  background: var(--bg-hologram-card);
+  backdrop-filter: blur(8px);
+  border: 2px solid var(--color-mjolnir-gold);
+  /* Borde dorado para información importante */
+  padding: 2rem;
+  box-shadow: 0 0 10px rgba(196, 160, 70, 0.3);
+}
+
+/* Estilo para el componente <Detalles> (Ventana de datos) */
+.detalles-vista {
+  background: var(--bg-hologram-card);
+  backdrop-filter: blur(12px);
+  border: 2px solid var(--color-accent-blue);
+  padding: 1.5rem;
+  box-shadow: 0 0 15px rgba(74, 168, 255, 0.4);
+}
+
+/* Estilo para el componente <Formulario> (Panel de entrada) */
+.formulario-entrada {
+  background: var(--bg-hologram-card);
+  backdrop-filter: blur(5px);
+  border: 1px solid var(--color-unsc-teal);
+  padding: 2rem;
+}
+
+/* --- Selectores de Componentes Nav/Footer --- */
+
+/* Estilo para el componente <Menu> */
+.menu-nav {
+  /* Sticky Navigation con efecto holográfico superior */
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+  background: rgba(14, 26, 42, 0.9);
+  border-bottom: 3px solid var(--color-unsc-teal);
+  box-shadow: 0 5px 20px var(--glow-primary);
+  backdrop-filter: blur(5px);
+}
+
+/* Estilo para el componente <Footer> */
+.footer-status {
+  width: 100%;
+  margin-top: auto;
+  /* Empuja el footer hacia abajo */
+  padding: 0.8rem 2rem;
+  background: var(--bg-darker);
+  border-top: 1px solid var(--border-soft);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+/* Línea de estado parpadeante sobre el footer */
+.footer-status::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-unsc-teal), transparent);
+  opacity: 0.7;
+  animation: footerStatusGlow 4s linear infinite alternate;
+}
+
+@keyframes footerStatusGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 5px var(--color-unsc-teal);
+    opacity: 0.7;
+  }
+
+  50% {
+    box-shadow: 0 0 10px var(--color-accent-blue);
+    opacity: 1;
+  }
+}
+
+
+/* ====================================================== */
+/* 📱 4. MEDIA QUERIES (Responsividad Táctica) 📱 */
+/* ====================================================== */
+
+@media (max-width: 768px) {
+  .main-viewport {
+    padding: 1rem 1rem;
+  }
+
+  .menu-nav {
+    /* Reducir el grosor del borde en móvil */
+    border-bottom-width: 2px;
+  }
+
+  .footer-status {
+    padding: 0.6rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* Quitar el backdrop-filter para mejor rendimiento en dispositivos de gama baja */
+  .autor-panel,
+  .detalles-vista,
+  .formulario-entrada {
+    backdrop-filter: none;
+    background: var(--bg-secondary);
+  }
 }

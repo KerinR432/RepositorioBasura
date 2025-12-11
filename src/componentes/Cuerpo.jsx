@@ -33,16 +33,18 @@ function Cuerpo({ total, setTotal,producto, setProductos }) {
             <main className='cards-container'>
 
                 {imagenesUrls.map((img, index) => (
-                     
-                    <div className='card' key={index}>
-                    <Link key={index} to="/detalles">
+                    <div className='card' 
+                    key={index}
+                    style={{animationDelay: `${index * 0.1}s`}}
+                    >
+                    <Link to={`/detalles/${img.id}`}>
                         <img src={img.url} alt={img.nombre} />
                     </Link>
-                        <h3>{img.nombre}</h3>
+                        <h3 className='titulo'>{img.nombre}</h3>
                         <p className='card-description'>Un elevador espacial a tu mesa, con la mejor carne de Moa que jamas hayas provado</p>
-                        <p className='card-price' >precio: {img.precio}€</p>
+                        <p className='card-price' >precio: {img.precio}cR</p>
                     
-                        <button onClick={() => aumentarCantidad(img)}>Pulsame</button>
+                        <button className='btoEnviar' onClick={() => aumentarCantidad(img)}>Pulsame</button>
 
                     </div>
                 ))}

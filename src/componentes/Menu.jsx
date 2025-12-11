@@ -1,6 +1,7 @@
 import '../estilos/Menu.css';
 import { useState } from "react";
 import { Link } from 'react-router-dom'
+import unggoyLogo from '../assets/logo-unggoy.png'
 
 function Menu({ total, producto }) {
 
@@ -13,10 +14,13 @@ function Menu({ total, producto }) {
   return (
     <>
       <div className='menu'>
-        <img src="../img/space-elevator.jpeg" alt="" className='logo' />
+        <img src={unggoyLogo} alt="Logo de la cadena de comida / Unggoy" className='logo' />
         <span className='total-precio'>{producto.length} : {total}€ </span>
         <li><Link to="/">Inicio</Link></li>
         <li><Link to="/Autor">Autor</Link></li>
+        <li><Link to="/Formulario">Formulario</Link></li>
+        <li><Link to="/Admin">Admin</Link></li>
+        <li><Link to="/Bienvenido">Bienvenido</Link></li>
         <button onClick={() => setMostrar(!mostrar)} className='carrito-icon'>🛒</button>
       </div>
 

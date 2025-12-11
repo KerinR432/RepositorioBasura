@@ -1,0 +1,514 @@
+/* Nuevas Variables Añadidas */
+:root {
+  /* Brand Colors */
+  --color-primary: #2EA9A1;
+  /* UNSC Teal */
+  --color-secondary: #C4A046;
+  /* Mjolnir Gold */
+  --color-hover-primary: #39c2b9;
+  --color-accent-blue: #4aa8ff;
+  /* Energy Blue */
+  --color-error: #ff4a4a;
+  /* Covenant Red/Emergency */
+
+  /* Backgrounds */
+  --bg-main: #0E1A2A;
+  /* Slipspace Navy */
+  --bg-card: #1f2e3c;
+  /* Metal UNSC */
+  --bg-glitch: rgba(255, 255, 255, 0.03);
+  /* Ruido sutil */
+  --bg-field: rgba(255, 255, 255, 0.04);
+  /* Fondo para Fieldset/Select */
+
+  /* Text */
+  --text-main: #E8ECF0;
+  --text-secondary: #a7b3be;
+  --text-error: #ffc9c9;
+
+  /* Borders & Shadows */
+  --border-soft: #3C4A56;
+  --shadow-strong: rgba(0, 0, 0, 0.55);
+  --glow-primary: rgba(46, 169, 161, 0.65);
+  --glow-blue: rgba(74, 168, 255, 0.4);
+
+  /* Motion */
+  --ease-unsc: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.35s;
+  --transition-fast: 0.2s;
+  --transition-long: 0.8s;
+
+  --radius: 0.65rem;
+}
+
+/* ---------------------------------------------------- */
+/* ANIMACIONES EXTRAS: GLITCH Y BORDES */
+/* ---------------------------------------------------- */
+
+@keyframes borderGlitch {
+
+  0%,
+  100% {
+    border-color: var(--border-soft);
+  }
+
+  10% {
+    border-color: var(--color-accent-blue);
+    box-shadow: 0 0 10px var(--glow-blue);
+  }
+
+  12% {
+    border-color: var(--border-soft);
+  }
+
+  15% {
+    border-color: var(--color-primary);
+  }
+
+  17% {
+    border-color: var(--border-soft);
+  }
+
+  20% {
+    border-color: var(--color-accent-blue);
+  }
+
+  25% {
+    border-color: var(--border-soft);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateX(-40%);
+  }
+
+  100% {
+    transform: translateX(140%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes checkboxGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 4px var(--glow-primary);
+  }
+
+  50% {
+    box-shadow: 0 0 10px var(--glow-primary);
+  }
+}
+
+@keyframes errorPulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.85;
+    transform: scale(1.02);
+  }
+}
+
+/* ---------------------------------------------------- */
+/* CONTENEDOR PRINCIPAL (MANTENIDO) */
+/* ---------------------------------------------------- */
+
+.main {
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% 0%, #14304d 0%, var(--bg-main) 60%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+/* ---------------------------------------------------- */
+/* FORMULARIO ULTRA (Glassmorphism & Glitch) */
+/* ---------------------------------------------------- */
+
+.formulario-cliente {
+  background: rgba(46, 62, 73, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  width: min(500px, 95%);
+  /* Aumentamos el ancho máximo para más campos */
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  /* Reducimos el gap para que quepan más campos */
+
+  box-shadow:
+    0 16px 35px var(--shadow-strong),
+    0 0 20px var(--glow-blue);
+
+  position: relative;
+  overflow: hidden;
+  animation:
+    fadeIn 0.8s var(--ease-unsc) forwards,
+    borderGlitch 3s 0.8s ease-in-out 1;
+}
+
+/* Efecto holográfico UNSC (Línea de escaneo) */
+.formulario-cliente::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-accent-blue), transparent);
+  opacity: 0.7;
+  animation: scanline 6s linear infinite;
+  z-index: 10;
+}
+
+/* Capa de Ruido Estático Sutil */
+.formulario-cliente::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg,
+      var(--bg-glitch),
+      transparent 1px,
+      transparent 2px);
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---------------------------------------------------- */
+/* LABELS (MÁS ENFÁTICAS) */
+/* ---------------------------------------------------- */
+
+.formulario-cliente  label {
+  color: var(--text-main);
+  font-weight: 700;
+  font-size: 1.1rem;
+  /* Ajuste para formularios con más campos */
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 5px rgba(46, 169, 161, 0.2);
+  margin-top: 0.4rem;
+  /* Separación de campos anteriores */
+}
+
+/* ---------------------------------------------------- */
+/* INPUTS, SELECTS, TEXTAREAS (Resplandor de Foco) */
+/* ---------------------------------------------------- */
+
+.formulario-cliente
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.4rem;
+  border: 1px solid var(--border-soft);
+
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  font-size: 1rem;
+  opacity: 0.9;
+
+  transition:
+    border-color var(--transition-normal) var(--ease-unsc),
+    box-shadow var(--transition-normal) var(--ease-unsc),
+    opacity var(--transition-normal) var(--ease-unsc);
+}
+
+.formulario-cliente ::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.formulario-cliente  input:hover,
+select:hover,
+textarea:hover {
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 10px rgba(196, 160, 70, 0.4);
+  opacity: 1;
+}
+
+.formulario-cliente  input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--color-hover-primary);
+  background-color: rgba(46, 62, 73, 0.85);
+
+  box-shadow:
+    0 0 16px var(--glow-primary),
+    inset 0 0 8px var(--glow-primary);
+}
+
+/* Estilo específico para SELECT */
+.formulario-cliente > select {
+  appearance: none;
+  /* Oculta flecha nativa */
+  background: var(--bg-card) url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23E8ECF0'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e") no-repeat right 1rem center;
+  background-size: 1.2em;
+}
+
+/* Textarea */
+#descripcion {
+  height: 120px;
+  resize: vertical;
+}
+
+/* ---------------------------------------------------- */
+/* CHECKBOX (Contenedor .check) */
+/* ---------------------------------------------------- */
+
+.formulario-cliente  .check {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding-top: 0.5rem;
+}
+
+/* Input Checkbox */
+.formulario-cliente  .check input[type="checkbox"] {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--border-soft);
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: var(--bg-field);
+  transition: all var(--transition-fast) var(--ease-unsc);
+}
+
+/* Checkbox Marcado */
+.formulario-cliente > .check input[type="checkbox"]:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-hover-primary);
+  position: relative;
+  animation: checkboxGlow 1.5s infinite alternate;
+}
+
+/* Icono de check (UNSC Style) */
+.formulario-cliente .check input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+  color: var(--text-main);
+  line-height: 1;
+}
+
+/* Label del Checkbox */
+.formulario-cliente  .check label {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: normal;
+  text-shadow: none;
+  color: var(--text-secondary);
+  margin-top: 0;
+}
+
+/* ---------------------------------------------------- */
+/* FIELDSET (Radio Buttons) */
+/* ---------------------------------------------------- */
+
+.formulario-cliente  fieldset {
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  margin-top: 1rem;
+  background-color: var(--bg-field);
+  transition: box-shadow var(--transition-normal);
+}
+
+.formulario-cliente  fieldset:hover {
+  box-shadow: 0 0 10px rgba(46, 169, 161, 0.15);
+}
+
+.formulario-cliente  legend {
+  color: var(--color-secondary);
+  /* Dorado Mjolnir para el título de la sección */
+  font-weight: 700;
+  padding: 0 0.5rem;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.formulario-cliente  fieldset>div {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-right: 1.5rem;
+  padding: 0.3rem 0;
+}
+
+/* Radio Buttons (UNSC Style) */
+.formulario-cliente fieldset input[type="radio"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border-soft);
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: transparent;
+  transition: all var(--transition-fast) var(--ease-unsc);
+  position: relative;
+  margin-right: 0.2rem;
+}
+
+.formulario-cliente  fieldset input[type="radio"]:checked {
+  border-color: var(--color-primary);
+}
+
+/* Punto interior del Radio Button */
+.formulario-cliente  fieldset input[type="radio"]:checked::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.formulario-cliente  fieldset label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-shadow: none;
+  margin-top: 0;
+  cursor: pointer;
+}
+
+/* ---------------------------------------------------- */
+/* MENSAJES DE ERROR (ALERTA DE SISTEMA) */
+/* ---------------------------------------------------- */
+
+.formulario-cliente  .error {
+  color: var(--text-error);
+  background-color: rgba(255, 74, 74, 0.1);
+  /* Fondo Rojo Covenant */
+  border: 1px solid var(--color-error);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-top: -0.8rem;
+  /* Para pegarlo al campo con error */
+  margin-bottom: 0.4rem;
+  animation: errorPulse 1s ease-out infinite alternate;
+}
+
+/* ---------------------------------------------------- */
+/* BOTÓN DE ENVÍO (PROTOCOLO DE TRANSFERENCIA) - ID ajustada */
+/* ---------------------------------------------------- */
+
+#bton {
+  padding: 0.8rem 1.5rem;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--color-primary) 50%, var(--color-hover-primary) 100%);
+  color: var(--text-main);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-transform: uppercase;
+
+  box-shadow: 0 6px 15px rgba(46, 169, 161, 0.4);
+  margin-top: 1.5rem;
+
+  transition:
+    background var(--transition-normal),
+    transform var(--transition-fast) var(--ease-unsc),
+    box-shadow var(--transition-normal);
+}
+
+#bton:hover {
+  background: linear-gradient(135deg, var(--color-hover-primary) 50%, var(--color-primary) 100%);
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 12px 25px rgba(46, 169, 161, 0.6);
+}
+
+#bton:active {
+  transform: translateY(-1px) scale(0.99);
+  box-shadow: 0 4px 10px rgba(46, 169, 161, 0.4);
+}
+
+/* ---------------------------------------------------- */
+/* RESPONSIVE GRANULAR */
+/* ---------------------------------------------------- */
+
+/* Media Query: Escritorio pequeño / Tablet horizontal (Ajuste Fieldset) */
+@media (max-width: 900px) {
+  form {
+    width: min(450px, 90%);
+    padding: 2rem;
+  }
+
+  fieldset>div {
+    margin-right: 1rem;
+  }
+}
+
+/* Media Query: Móvil (hasta 600px) */
+@media (max-width: 600px) {
+  form {
+    padding: 1.5rem;
+    gap: 1rem;
+    width: 95%;
+  }
+
+  label {
+    font-size: 1rem;
+    margin-top: 0.3rem;
+  }
+
+  input[type="text"],
+  select,
+  textarea {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  /* Fieldset vertical en móvil */
+  fieldset>div {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .error {
+    font-size: 0.85rem;
+  }
+
+  #bton {
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+}

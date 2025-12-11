@@ -1,18 +1,26 @@
-/*
-Este bloque root es el div donde encapsula toda la app. los colores sacados de IA son para todo texto
-fondos, botones, etc. 
-*/
+/* ============================================================
+   BLOQUE ROOT & ANIMACIONES (Mantenidas del anterior)
+   ============================================================ */
 :root {
   /* Brand Colors */
-  --color-primary: #2ea9a1; /* UNSC Teal */
-  --color-secondary: #c4a046; /* Mjolnir Gold */
-  --color-accent-blue: #4aa8ff; /* Energy Sword Blue */
-  --color-accent-purple: #8240ff; /* Plasma Purple */
+  --color-primary: #2ea9a1;
+  /* UNSC Teal */
+  --color-secondary: #c4a046;
+  /* Mjolnir Gold */
+  --color-accent-blue: #4aa8ff;
+  /* Energy Sword Blue */
+  --color-accent-purple: #8240ff;
+  /* Plasma Purple */
 
   /* Backgrounds */
-  --bg-main: #0e1a2a; /* Slipspace Navy */
-  --bg-secondary: #1f2e3c; /* UNSC Steel */
-  --bg-card: #2e3e49; /* Forerunner Gray */
+  --bg-main: #0e1a2a;
+  /* Slipspace Navy */
+  --bg-secondary: #1f2e3c;
+  /* UNSC Steel */
+  --bg-card: #2e3e49;
+  /* Forerunner Gray */
+  --bg-overlay: rgba(14, 26, 42, 0.95);
+  /* Fondo oscuro casi opaco */
 
   /* Text */
   --text-main: #e8ecf0;
@@ -23,140 +31,429 @@ fondos, botones, etc.
   --hover-primary: #39c2b9;
   --hover-secondary: #d7b25a;
   --hover-link: #6bc2ff;
+  --active-glitch: #ff4a6e;
 
-  --border-soft: #3c4a56;
-  --shadow-black: rgba(0, 0, 0, 0.2);
-
+  /* Transitions & Geometry */
   --unsc-transition-fast: 0.2s;
-  --unsc-transition-normal: 0.3s;
-  --unsc-transition-slow: 0.4s;
-  --unsc-border-radius: 12px;
-  /* verde oliva claro para hover */
-  --unsc-border-radius: 0.5rem;
+  --unsc-transition-normal: 0.35s;
+  --unsc-ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --unsc-border-radius: 8px;
+  --unsc-padding: 1.25rem 2rem;
+  --unsc-gap: 1.5rem;
+  --border-soft: #3c4a56;
+  --shadow-black: rgba(0, 0, 0, 0.4);
 }
 
-/*
-Aqui ira lo generico y que afecte todo del menu
-*/
+@keyframes hudBoot {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+    filter: blur(8px);
+  }
 
+  60% {
+    opacity: 0.8;
+    transform: translateY(5px) scale(1.02);
+    filter: blur(1px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes energyScan {
+  0% {
+    transform: translateX(-150%);
+  }
+
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes glitchEffect {
+  0% {
+    transform: translate(0);
+    box-shadow: none;
+  }
+
+  20% {
+    transform: translate(-1px, 1px);
+    box-shadow: 0 0 10px var(--active-glitch);
+  }
+
+  40% {
+    transform: translate(1px, -1px);
+    box-shadow: 0 0 10px var(--color-accent-blue);
+  }
+
+  60% {
+    transform: translate(-2px, 0);
+    box-shadow: 0 0 10px var(--active-glitch);
+  }
+
+  100% {
+    transform: translate(0);
+    box-shadow: none;
+  }
+}
+
+@keyframes softSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes metallicShake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(1px);
+  }
+
+  50% {
+    transform: translateX(-1px);
+  }
+
+  75% {
+    transform: translateX(2px);
+  }
+}
+
+@keyframes pulseUNSC {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(46, 169, 161, 0.0);
+  }
+
+  50% {
+    box-shadow: 0 0 25px 5px rgba(46, 169, 161, 0.75);
+  }
+}
+
+@keyframes springHover {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  70% {
+    transform: scale(0.98);
+  }
+
+  100% {
+    transform: scale(1.03);
+  }
+}
+
+@keyframes scanLines {
+  0% {
+    background-position-y: 0;
+  }
+
+  100% {
+    background-position-y: 100%;
+  }
+}
+
+
+/* ============================================================
+   GENERALES & BODY
+   ============================================================ */
 body {
   margin: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
 }
 
-
-/*
-le es estamos diciendo que 'a' que hay en el menu se aplique una transcisiones, para que vea bonito el dar click
-*/
-.menu div,
-.menu a,
-li a {
-  transition: transform var(--unsc-transition-normal)
-      var(--unsc-transition-ease),
-    color var(--unsc-transition-normal) var(--unsc-transition-ease);
+/* Transiciones generales */
+.menu li,
+.menu button,
+.menu a {
+  transition: transform var(--unsc-transition-normal) var(--unsc-ease-out),
+    color var(--unsc-transition-fast),
+    background-color var(--unsc-transition-fast),
+    box-shadow var(--unsc-transition-normal);
 }
 
-/*
-Aplicamos un 'hover' para que se ejecute estos cambios
-*/
-.menu div:hover,
-.menu a:hover,
-li:hover {
-  transform: scale(1.05);
-}
-
-/*
-el menu encapsula todo lo anterior, aqui haremos todo de el layaout
-asi como el color principal del menu
-*/
+/* ============================================================
+   MENÚ PRINCIPAL
+   ============================================================ */
 .menu {
-  z-index: 2;
+  z-index: 100;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between;  -> Lo quitamos para mejor control del espacio */
   background-color: var(--bg-secondary);
-  padding: 10px 20px;
-  color: var(--text-main);
-  gap: 1rem;
+  padding: 1rem var(--unsc-padding);
+  gap: var(--unsc-gap);
+  position: relative;
+  /* Contenedor de referencia para la línea de escaneo */
+  box-shadow: 0 4px 15px var(--shadow-black);
+  overflow: hidden;
+}
+
+.menu::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: repeating-linear-gradient(0deg,
+      rgba(255, 255, 255, 0.03) 0,
+      rgba(255, 255, 255, 0.03) 2px,
+      transparent 2px,
+      transparent 4px);
+  opacity: 0.5;
+  pointer-events: none;
+  animation: scanLines 8s linear infinite;
+}
+
+.menu::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--color-accent-blue), transparent);
+  animation: energyScan 3s linear infinite;
 }
 
 .logo {
-  font-weight: bold;
-  font-size: 1.5rem;
-  color: var(--text-dark);
+  height: 40px;
+  /* Tamaño fijo para el logo-imagen */
+  width: auto;
+  border-radius: var(--unsc-border-radius);
+  border: 2px solid var(--color-accent-blue);
+  object-fit: cover;
+  animation: hudBoot 1.2s var(--unsc-ease-out);
 }
 
+/* ============================================================
+   ELEMENTOS DE NAVEGACIÓN
+   ============================================================ */
+.menu li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu a {
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.menu li:hover {
+  transform: scale(1.05);
+  animation: springHover 0.35s ease-out;
+}
+
+.menu a:hover {
+  color: var(--hover-link);
+  text-shadow: 0 0 8px rgba(74, 168, 255, 0.7);
+}
+
+
+/* ============================================================
+   TOTAL PRECIO Y BOTÓN CARRITO
+   ============================================================ */
 .total-precio {
   background-color: var(--bg-card);
-  padding: 8px 20px;
+  padding: 10px 20px;
   border-radius: var(--unsc-border-radius);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  display: flex;
-  gap: 15px;
-  min-width: 180px;
-  justify-content: center;
-}
-
-.carrito {
-  background-color: var(--color-primary);
-  padding: 8px 16px;
-  border-radius: var(--unsc-border-radius);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  color: var(--color-secondary);
+  margin-left: auto;
+  /* Empuja los elementos siguientes a la derecha */
+  border: 1px solid var(--border-soft);
+  box-shadow: inset 0 0 10px rgba(196, 160, 70, 0.2);
 }
 
 .carrito-icon {
+  /* Es un botón con el emoji de carrito */
+  background: var(--color-primary);
+  border: none;
   border-radius: var(--unsc-border-radius);
-  width: 30px;
-  height: 30px;
-  fill: var(--color-accent-blue);
-  transition: transform 0.4s, background-color 0.4s;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+  box-shadow: 0 0 15px rgba(46, 169, 161, 0.3);
+  margin-left: 1rem;
 }
 
 .carrito-icon:hover {
-  transform: scale(1.1);
-  background-color: var(--color-accent-purple);
-  box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.3);
+  background-color: var(--hover-primary);
+  animation: pulseUNSC 1.5s infinite;
+  transform: scale(1.05);
 }
 
+.carrito-icon:active {
+  animation: metallicShake 0.3s linear;
+  transform: scale(0.95);
+}
+
+
+/* ============================================================
+   DESPLEGABLE #productos
+   ============================================================ */
 #productos {
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: opacity 0.3s ease, max-height 0.3s ease;
-}
-
-#productos.show {
-  opacity: 1;
-  max-height: 500px; /* suficiente para mostrar todos los elementos */
-}
-
-li {
+  position: absolute;
+  top: 100px;
+  /* Ajusta este valor si el menú cambia de altura */
+  right: 1.5rem;
+  /* Alineado a la derecha, debajo del botón de carrito */
+  width: 280px;
+  z-index: 90;
   list-style: none;
-  transition: transform 0.5s ease, color 0.3s ease;
+  padding: 0;
+  margin: 0;
+  background-color: var(--bg-overlay);
+  border: 1px solid var(--color-accent-blue);
+  border-top: none;
+  border-radius: 0 0 var(--unsc-border-radius) var(--unsc-border-radius);
+  box-shadow: 0 10px 20px var(--shadow-black);
+  animation: hudBoot 0.4s var(--unsc-ease-out);
+  /* Animación de entrada */
 }
 
-li a {
-  text-decoration: none;
-  font-size: 1.1rem;
+/* Estilo para los divs internos (elementos de la lista de compra) */
+#productos>div {
+  padding: 10px 15px;
+  color: var(--text-main);
+  border-bottom: 1px dashed rgba(74, 168, 255, 0.2);
+  cursor: default;
+  animation: softSlideIn 0.3s ease forwards;
+}
+
+#productos>div:hover {
+  background-color: rgba(74, 168, 255, 0.1);
   color: var(--color-accent-blue);
 }
 
-li:hover {
-  transform: scale(1.2);
+#productos>div:last-child {
+  border-bottom: none;
 }
 
-li a {
-  text-decoration: none;
-  font-size: 1.1rem;
-  color: var(--color-accent-blue);
-  transition: color 0.3s ease;
+
+/* ============================================================
+   MENÚ PRINCIPAL (AJUSTES)
+   ============================================================ */
+
+/* Nuevo contenedor para los enlaces */
+.menu-links {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 1.5rem;
+  /* Usamos el gap ya definido */
 }
 
-li a:hover {
-  color: var(--hover-link);
+/* Ajuste del Total Precio para el nuevo formato de texto */
+.total-precio {
+  /* ... estilos anteriores ... */
+  margin-right: var(--unsc-gap);
+  /* Espacio antes de los enlaces */
+}
+
+/* Nueva clase para carrito activo y efecto Glitch */
+.carrito-icon.active-glitch {
+  background-color: var(--hover-primary);
+  animation: glitchEffect 0.3s steps(2, end) infinite alternate;
+  border: 2px solid var(--active-glitch);
+  box-shadow: 0 0 15px var(--active-glitch);
+}
+
+/* ============================================================
+   MEDIA QUERIES (Ajuste para ocultar la lista no ordenada)
+   ============================================================ */
+@media (max-width: 850px) {
+
+  /* Ocultamos el contenedor de enlaces en móviles */
+  .menu-links {
+    display: none;
+  }
+
+  /* ... El resto de tus media queries anteriores ... */
+}
+
+
+
+
+
+
+
+/* ============================================================
+   MEDIA QUERIES (Responsividad Móvil)
+   ============================================================ */
+@media (max-width: 850px) {
+
+  /* Ocultamos los enlaces de navegación en pantallas pequeñas para priorizar el espacio */
+  .menu li {
+    display: none;
+  }
+
+  /* Redistribuimos el menú para móviles */
+  .menu {
+    padding: 1rem;
+    gap: 1rem;
+    justify-content: space-between;
+    /* El logo y el total/carrito a los lados */
+  }
+
+  .logo {
+    height: 35px;
+  }
+
+  .total-precio {
+    order: 1;
+    /* Posiciona el total antes de los enlaces */
+    margin-left: 1rem;
+    font-size: 1rem;
+    padding: 8px 15px;
+    flex-shrink: 0;
+  }
+
+  .carrito-icon {
+    order: 2;
+    padding: 8px 12px;
+    font-size: 1.3rem;
+    margin-left: 1rem;
+  }
+
+  #productos {
+    top: 60px;
+    /* Ajuste basado en la altura del menú más pequeño */
+    right: 1rem;
+    width: 90%;
+    /* Ocupa la mayor parte del ancho */
+    max-width: 300px;
+    left: unset;
+  }
 }

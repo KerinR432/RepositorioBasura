@@ -1,14 +1,27 @@
+/* ===================================================================================== */
+/* VARIABLES (ROOT) - Mantenidas de la versión anterior */
+/* ===================================================================================== */
+
 :root {
   /* Brand Colors */
-  --color-primary: #2ea9a1; /* UNSC Teal */
-  --color-secondary: #c4a046; /* Mjolnir Gold */
-  --color-accent-blue: #4aa8ff; /* Energy Sword Blue */
-  --color-accent-purple: #8240ff; /* Plasma Purple */
+  --color-primary: #2ea9a1;
+  /* UNSC Teal */
+  --color-secondary: #c4a046;
+  /* Mjolnir Gold */
+  --color-accent-blue: #4aa8ff;
+  /* Energy Sword Blue */
+  --color-accent-purple: #8240ff;
+  /* Plasma Purple */
 
   /* Backgrounds */
-  --bg-main: #0e1a2a; /* Slipspace Navy */
-  --bg-secondary: #1f2e3c; /* UNSC Steel */
-  --bg-card: #2e3e49; /* Forerunner Gray */
+  --bg-main: #0e1a2a;
+  /* Slipspace Navy */
+  --bg-secondary: #1f2e3c;
+  /* UNSC Steel */
+  --bg-card: #2e3e49;
+  /* Forerunner Gray */
+  --bg-darker: #060c14;
+  /* Fondo más oscuro para el cuerpo */
 
   /* Text */
   --text-main: #e8ecf0;
@@ -17,94 +30,375 @@
 
   /* States */
   --hover-primary: #39c2b9;
-  --hover-secondary: #d7b25a;
   --hover-link: #6bc2ff;
 
+  /* Geometry & Transitions */
   --border-soft: #3c4a56;
-  --shadow-black: rgba(0, 0, 0, 0.2);
-  --unsc-transition-fast: 0.2s;
-  --unsc-transition-normal: 0.3s;
-  --unsc-transition-slow: 0.4s;
-  --unsc-border-radius: 12px;
+  --shadow-black: rgba(0, 0, 0, 0.45);
+  --unsc-border-radius: 10px;
+  --unsc-card-padding: 1.5rem;
+  --unsc-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --unsc-fast: 0.18s;
+  --unsc-normal: 0.3s;
+  --unsc-slow: 0.5s;
 }
 
+/* ===================================================================================== */
+/* ANIMACIONES */
+/* ===================================================================================== */
 
+@keyframes shield-recharge {
+  0% {
+    box-shadow: inset 0 0 0 50vh rgba(74, 168, 255, 0.6);
+  }
+
+  100% {
+    box-shadow: inset 0 0 0 0 rgba(74, 168, 255, 0);
+  }
+}
+
+@keyframes hud-boot {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    filter: blur(10px);
+  }
+
+  60% {
+    opacity: 0.8;
+    transform: translateY(-5px) scale(1.01);
+    filter: blur(1px);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes forerunner-scan {
+  0% {
+    transform: translateX(-120%);
+    opacity: 0.1;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(140%);
+    opacity: 0.1;
+  }
+}
+
+@keyframes unsc-pulse {
+  0% {
+    box-shadow: 0 0 0 rgba(46, 169, 161, 0);
+  }
+
+  50% {
+    box-shadow: 0 0 25px 5px rgba(46, 169, 161, 0.7);
+  }
+
+  100% {
+    box-shadow: 0 0 0 rgba(46, 169, 161, 0);
+  }
+}
+
+@keyframes border-glow {
+
+  0%,
+  100% {
+    border-color: var(--border-soft);
+    box-shadow: 0 0 5px rgba(74, 168, 255, 0.1);
+  }
+
+  50% {
+    border-color: var(--color-accent-blue);
+    box-shadow: 0 0 15px rgba(74, 168, 255, 0.5);
+  }
+}
+
+@keyframes rise-fade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================================================================================== */
+/* GENERALES & BODY (Incluye la Recarga de Escudo) */
+/* ===================================================================================== */
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-darker);
+  color: var(--text-main);
+  min-height: 100vh;
+  /* Aplicación de la animación de recarga de escudo */
+  animation: shield-recharge 1s ease-out 0.1s forwards;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: repeating-linear-gradient(transparent,
+      transparent 1px,
+      rgba(0, 0, 0, 0.1) 2px,
+      rgba(0, 0, 0, 0.1) 3px);
+  opacity: 0.3;
+  z-index: 9999;
+}
+
+/* ===================================================================================== */
+/* CONTENEDOR DE TARJETAS (GRID) */
+/* ===================================================================================== */
 
 .cards-container {
   display: grid;
-  padding: 10rem;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 45px;
+  padding: 6rem 3rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 40px;
   justify-content: center;
   background-color: var(--bg-main);
+  min-height: 80vh;
+
+  /* ✅ CORRECCIÓN 1: Establecer una perspectiva 3D para evitar el recorte del contenedor Grid. */
+  perspective: 1000px;
+  position: relative;
+  z-index: 1;
+
+  animation: hud-boot 1.2s var(--unsc-ease) 0.8s backwards;
 }
+
+/* ===================================================================================== */
+/* TARJETA (CARTA INDIVIDUAL) */
+/* ===================================================================================== */
 
 .card {
   background-color: var(--bg-card);
   border: 1px solid var(--border-soft);
   border-radius: var(--unsc-border-radius);
-  box-shadow: 0 2px 8px var(--shadow-black);
-  overflow: hidden;
+  padding: var(--unsc-card-padding);
+  box-shadow: 0 4px 15px var(--shadow-black);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 10px;
-  transition: transform var(--unsc-transition-normal)
-      var(--unsc-transition-ease),
-    box-shadow var(--unsc-transition-normal) var(--unsc-transition-ease);
+  position: relative;
+  transition: transform var(--unsc-normal) var(--unsc-ease),
+    box-shadow var(--unsc-normal) var(--unsc-ease),
+    border-color var(--unsc-slow);
+
+  animation: rise-fade 0.7s var(--unsc-ease) forwards;
+  /* 🟢 ¡CORRECCIÓN! Se elimina 'opacity: 0;' de aquí. */
+}
+
+/* Línea de energía forerunner */
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      var(--color-accent-blue),
+      transparent);
+  animation: forerunner-scan 2.8s linear infinite;
+  opacity: 0;
+  transition: opacity var(--unsc-fast);
 }
 
 .card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px var(--shadow-black);
+  transform: translateY(-10px) scale(1.04);
+  /* Aseguramos la capa superior */
+  z-index: 999;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(74, 168, 255, 0.55);
+
+  animation: border-glow 2.5s ease infinite;
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+/* ===================================================================================== */
+/* IMAGEN Y LINK (Añadido para dar estilo al Link) */
+/* ===================================================================================== */
+
+.card a {
+  text-decoration: none;
+  /* Quita el subrayado del link */
+  display: block;
+  width: 100%;
 }
 
 .card img {
   width: 100%;
-  /* para que la imagen sea responsive */
-  height: 180px;
+  height: 200px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border-soft);
+  transition: transform var(--unsc-normal) var(--unsc-ease),
+    border-color var(--unsc-normal);
 }
 
-
-h3 {
-  color:var(--text-main);
+.card:hover img {
+  transform: scale(1.1);
+  border-color: var(--color-accent-blue);
 }
+
+/* ===================================================================================== */
+/* TEXTOS */
+/* ===================================================================================== */
+
+.titulo {
+  color: var(--color-accent-blue);
+  margin-top: 1rem;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
 .card-description {
-  font-size: 1rem;
   color: var(--text-secondary);
-  margin: 15px 0 8px;
+  margin: 15px 0;
+  line-height: 1.5;
+  font-size: 0.95rem;
+  /* Altura fija para evitar que las tarjetas salten si la descripción varía */
+  min-height: 4.5rem;
 }
 
 .card-price {
-  font-weight: bold;
-  font-size: 1.2rem;
-  color: var(--text-dark);
-  margin-bottom: 12px;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--color-secondary);
+  text-shadow: 0 0 6px rgba(196, 160, 70, 0.6);
+  margin-bottom: 1.5rem;
 }
 
-.card button {
+/* ===================================================================================== */
+/* BOTÓN UNSC (Interacción) */
+/* ===================================================================================== */
+
+.btoEnviar {
   background-color: var(--color-primary);
-  color: var(--text-main);
-  border: none;
-  border-radius: var(--unsc-border-radius);
-  padding: 10px 20px;
+  color: var(--text-dark);
+  font-weight: 600;
+  border: 2px solid var(--hover-primary);
+  padding: 14px 30px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background-color var(--color-secondary)
-      var(--unsc-transition-ease),
-    transform var(--unsc-transition-fast) var(--unsc-transition-ease);
+  border-radius: 6px;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  width: 100%;
+
+  transition: background-color var(--unsc-normal), transform var(--unsc-fast),
+    box-shadow var(--unsc-slow);
 }
 
 .card button:hover {
   background-color: var(--hover-primary);
-  transform: scale(1.05);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+
+  animation: unsc-pulse 1.2s infinite;
 }
 
+.card button:active {
+  transform: translateY(-1px) scale(0.98);
+}
 
-.footer{
-  height: 100%;
+/* ===================================================================================== */
+/* FOOTER */
+/* ===================================================================================== */
+
+.footer {
   width: 100%;
+  background-color: var(--bg-darker);
+  border-top: 1px solid var(--border-soft);
+  padding: 2.5rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.2);
+
+  animation: hud-boot 1.2s var(--unsc-ease) 1.5s backwards;
+}
+
+/* ===================================================================================== */
+/* MEDIA QUERIES (RESPONSIVIDAD) */
+/* ===================================================================================== */
+
+/* Tablet y dispositivos medianos */
+@media (max-width: 1024px) {
+  .cards-container {
+    padding: 4rem 2rem;
+    gap: 32px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+
+  .card {
+    padding: 1.2rem;
+  }
+
+  .card img {
+    height: 180px;
+  }
+
+  .titulo {
+    font-size: 1.4rem;
+  }
+
+  .card-description {
+    min-height: 4rem;
+    /* Ajuste para pantallas medianas */
+  }
+}
+
+/* Móviles */
+@media (max-width: 600px) {
+  .cards-container {
+    padding: 2rem 1rem;
+    gap: 20px;
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    max-width: 100%;
+  }
+
+  .card-description {
+    font-size: 1rem;
+    min-height: unset;
+    /* Deja que la altura se ajuste en móvil */
+  }
+
+  .card img {
+    height: 160px;
+  }
+
+  .btoEnviar {
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+
+  .footer {
+    padding: 1.5rem;
+  }
 }

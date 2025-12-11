@@ -1,87 +1,312 @@
 :root {
-  /* Brand Colors */
-  --color-primary: #2ea9a1; /* UNSC Teal */
-  --color-secondary: #c4a046; /* Mjolnir Gold */
-  --color-accent-blue: #4aa8ff; /* Energy Sword Blue */
-  --color-accent-purple: #8240ff; /* Plasma Purple */
-
-  /* Backgrounds */
-  --bg-main: #0e1a2a; /* Slipspace Navy */
-  --bg-secondary: #1f2e3c; /* UNSC Steel */
-  --bg-card: #2e3e49; /* Forerunner Gray */
-
-  /* Text */
-  --text-main: #e8ecf0;
-  --text-secondary: #a7b3be;
-  --text-dark: #0b0f14;
-
-  /* States */
-  --hover-primary: #39c2b9;
-  --hover-secondary: #d7b25a;
-  --hover-link: #6bc2ff;
-
+  /* ... (Tus variables existentes para Colores, Fondos, Texto, Motion, etc.) ... */
+  --color-primary: #2ea9a1;
+  --color-secondary: #c4a046;
+  --color-accent-blue: #4aa8ff;
+  --bg-main: #0e1a2a;
   --border-soft: #3c4a56;
-  --shadow-black: rgba(0, 0, 0, 0.2);
-
-  --unsc-transition-fast: 0.2s;
-  --unsc-transition-normal: 0.3s;
-  --unsc-transition-slow: 0.4s;
-  --unsc-border-radius: 12px;
-  /* verde oliva claro para hover */
-  --unsc-border-radius: 0.5rem;
+  --unsc-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --unsc-slow: 0.45s;
+  --unsc-normal: 0.28s;
+  --radius-sharp: 0.3rem; /* Esquinas más militares */
+  
+  /* Spacing System (Modular) */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 3.5rem;
+  --space-xl: 5rem;
 }
 
+/* ---------------------------------- */
+/* ANIMACIONES GENERALES */
+/* ---------------------------------- */
+
+@keyframes hudBoot {
+  0% {
+    opacity: 0;
+    transform: translateY(var(--space-md)) scale(0.97);
+    filter: blur(4px);
+    border-color: var(--color-accent-blue);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(calc(-1 * var(--space-xs))) scale(1.01);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    border-color: var(--border-soft);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 14px rgba(46,169,161,0.4), 0 6px 16px rgba(0,0,0,0.45);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(74,168,255,0.55), 0 10px 20px rgba(0,0,0,0.55);
+  }
+}
+
+@keyframes glitchText {
+  0% { clip-path: inset(0 0 100% 0); }
+  25% { clip-path: inset(50% 0 40% 0); opacity: 0.8; }
+  50% { clip-path: inset(10% 0 85% 0); opacity: 0.6; }
+  75% { clip-path: inset(70% 0 5% 0); opacity: 0.9; }
+  100% { clip-path: inset(0 0 0 0); opacity: 1; }
+}
+
+@keyframes textRise {
+  0% { opacity: 0; transform: translateY(12px); filter: blur(2px);}
+  100% { opacity: 1; transform: translateY(0); filter: blur(0);}
+}
+
+@keyframes levitar {
+  from { transform: translateY(0px); }
+  to   { transform: translateY(-8px); }
+}
+
+/* ---------------------------------- */
+/* CONTENEDOR PRINCIPAL (Autor-main) */
+/* ---------------------------------- */
 
 .Autor-main {
-    margin: 10rem;
-    min-width: 100vh;
-    display: flex;
-    flex-direction: row;
-    /* fila: imagen a la izquierda, texto a la derecha */
-    flex-wrap: wrap;
-    /* para responsividad en pantallas pequeñas */
-    align-items: flex-start;
-    /* alinear arriba la imagen y texto */
-    justify-content: center;
-    gap: 2rem;
-    /* espacio entre imagen y texto */
-    padding: 2rem;
-    background-color: var(--bg-main);
-    height: 100%;
+  margin: var(--space-xl) auto;
+  max-width: 1400px;
+  
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: var(--space-lg);
+  
+  padding: var(--space-lg) var(--space-xl);
+  background-color: var(--bg-main);
+
+  border-radius: var(--radius-sharp);
+  border: 1px solid var(--border-soft);
+  
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.45),
+    0 0 20px rgba(74, 168, 255, 0.1),
+    inset 0 0 0 1px rgba(74, 168, 255, 0.15);
+
+  animation: hudBoot 1.5s var(--unsc-ease) forwards;
+  transition: transform var(--unsc-slow) var(--unsc-ease), box-shadow var(--unsc-normal);
+  
+  position: relative;
+  overflow: hidden;
 }
+
+/* Esquinas de Marco HUD (Mejora) */
+.Autor-main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border-top: 2px solid var(--color-accent-blue);
+    border-left: 2px solid var(--color-accent-blue);
+}
+.Autor-main::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border-bottom: 2px solid var(--color-primary);
+    border-right: 2px solid var(--color-primary);
+}
+
+.Autor-main:hover {
+  transform: translateY(-8px) rotateZ(-0.2deg);
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(74, 168, 255, 0.4);
+}
+
+/* ---------------------------------- */
+/* IMAGEN (imagenLado) */
+/* ---------------------------------- */
 
 .imagenLado {
-    flex: 0 0 250px;
+    /* Aseguramos que la imagen se alinee al inicio o se centre en móviles */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-.imagenLado>img {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    object-fit: cover;
+.imagenLado > img {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+  
+  /* Borde doble Spartan */
+  border: 6px solid var(--color-primary); 
+  outline: 1px solid var(--color-accent-blue);
+  outline-offset: 4px;
+
+  animation: levitar 4s ease-in-out infinite alternate, pulseGlow 3s ease-in-out infinite;
+
+  transition:
+    transform var(--unsc-normal) var(--unsc-ease),
+    border-color var(--unsc-normal) var(--unsc-ease),
+    outline-color var(--unsc-normal) var(--unsc-ease);
 }
 
-h1 {
-    margin: .3rem;
-    font-size: 2rem;
-    color: var(--text-main);
+.imagenLado > img:hover {
+  transform: scale(1.1);
+  border-color: var(--color-accent-blue);
+  outline-color: var(--color-secondary);
 }
 
-h2 {
-    padding: .3rem;
-    font-size: 1.5rem;
-    color:var(--text-dark)
-}
+/* ---------------------------------- */
+/* CONTENIDO DERECHO (derecha) */
+/* ---------------------------------- */
 
 .derecha {
-    flex: 1;
-    /* ocupa todo el espacio restante */
-    padding: 1rem;
+    /* Mantiene el flujo de contenido */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-p {
-    width: 40%;
-    font-size: 1rem;
+/* ---------------------------------- */
+/* TITULOS (arriba) */
+/* ---------------------------------- */
+
+/* Selectores específicos para la animación y retrasos */
+.derecha h1, .derecha h2 {
+    opacity: 0;
+    transform: translateY(var(--space-xs));
+    /* Animación combinada para la entrada con glitch */
+    animation: textRise 1s var(--unsc-ease) forwards, glitchText 0.6s var(--unsc-fast) 1, textRise 1s 1s var(--unsc-ease) forwards;
+}
+
+.derecha h1 { 
+    animation-delay: 0.2s; 
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 2.5rem;
+    
+    /* Efecto de Proyección de Luz y Scanline */
+    text-shadow: 0 0 3px var(--color-accent-blue); 
+    background: 
+        linear-gradient(transparent 80%, rgba(74,168,255,0.12) 80%);
+    background-size: 100% 4px;
+    background-repeat: repeat-y;
+    background-position-y: 0;
+    animation: scanlineText 4s linear infinite, textRise 1s 0.2s var(--unsc-ease) forwards, glitchText 0.6s 0.2s 1;
+    padding-bottom: var(--space-xs);
+    border-bottom: 1px solid rgba(74, 168, 255, 0.2);
+}
+@keyframes scanlineText {
+  0% { background-position-y: 0; }
+  100% { background-position-y: 100%; }
+}
+
+
+.derecha h2 { 
+    animation-delay: 0.4s; 
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 400; /* Texto secundario más ligero */
+    margin-top: var(--space-xs);
+    font-size: 1.4rem;
+}
+
+/* ---------------------------------- */
+/* PARRAFO (izquierda) */
+/* ---------------------------------- */
+
+.izquierda p {
+    opacity: 0;
+    transform: translateY(var(--space-xs));
+    animation: textRise 1s 0.6s var(--unsc-ease) forwards;
+    line-height: 1.6;
     color: var(--text-secondary);
-    line-height: 1.5;
+    margin-top: var(--space-md);
+    
+    /* Pequeño detalle de borde inferior para separar */
+    border-top: 1px dashed var(--border-soft); 
+    padding-top: var(--space-md);
+}
+
+
+/* ---------------------------------- */
+/* RESPONSIVE ULTRA (Media Queries) */
+/* ---------------------------------- */
+
+/* Tablet (hasta 1100px) */
+@media (max-width: 1100px) {
+    .Autor-main {
+        grid-template-columns: 200px 1fr;
+        gap: var(--space-md);
+        max-width: 95%;
+        padding: var(--space-md);
+    }
+    
+    .imagenLado > img {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .derecha h1 { font-size: 2rem; }
+    .derecha h2 { font-size: 1.1rem; }
+}
+
+/* Teléfono (hasta 768px) - Cambio a columna única */
+@media (max-width: 768px) {
+  .Autor-main {
+    grid-template-columns: 1fr; /* Una sola columna */
+    text-align: center;
+    margin: var(--space-md) auto;
+    padding: var(--space-md);
+  }
+
+  .imagenLado {
+    justify-content: center;
+    align-items: center; /* Centrar la imagen verticalmente si es necesario */
+    margin-bottom: var(--space-sm);
+  }
+
+  .imagenLado > img {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .derecha h1 { 
+    font-size: 1.8rem;
+    padding-bottom: var(--space-xs);
+    /* Aseguramos que el texto esté centrado en móvil */
+    text-align: center; 
+  }
+  
+  .derecha h2 { 
+      font-size: 1rem; 
+      text-align: center;
+  }
+  
+  .izquierda p { 
+    max-width: 100%; 
+    margin: var(--space-xs) auto; 
+    text-align: left; /* Mantenemos la lectura fácil en párrafos */
+  }
+  
+  /* Eliminar los pseudo-elementos de esquina para no saturar el espacio */
+  .Autor-main::before, .Autor-main::after {
+      content: none;
+  }
+}
+
+/* Teléfono muy pequeño (hasta 480px) */
+@media (max-width: 480px) {
+    .Autor-main {
+        padding: var(--space-sm);
+    }
 }
