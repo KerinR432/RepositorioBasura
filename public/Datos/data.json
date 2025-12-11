@@ -1,0 +1,154 @@
+{
+    "productos": [
+        {
+            "id":"1",
+            "url": "/space-elevator.jpeg",
+            "nombre": "Hamburgesas Elevador Moa",
+            "precio": 13.5
+        },
+        {
+            "id":"2",
+            "url": "/Halo-Halo.jpg",
+            "nombre": "Halo-Halo",
+            "precio": 15
+        },
+        {
+            "id":"3",
+            "url": "/MintJulpe.jpg",
+            "nombre": "Mint Julpe",
+            "precio": 10
+        },
+        {
+            "id":"4",
+            "url": "../Tarta de Plasma de Luna Nueva.png",
+            "nombre": "Tarta de plasma",
+            "precio": 15
+        },
+        {
+            "id":"5",
+            "url": "../Sopa de Células de Maíz Nómada.png",
+            "nombre": "Sopa de Célula de Maíz",
+            "precio": 5
+        },
+        {
+            "id":"6",
+            "url": "../Estofado de Mandíbula de Jhar.png",
+            "nombre": "Estofado de Jhar",
+            "precio": 25
+        },
+        {
+            "id":"7",
+            "url": "../Panal de K'thar (Deshidratado).png",
+            "nombre": "Panal de K'thar",
+            "precio": 11.3
+        },
+        {
+            "id":"8",
+            "url": "../Lágrimas de Profeta (Salsa).png",
+            "nombre": "Lagrima de Profeta",
+            "precio": 5.4
+        },
+        {
+            "id":"9",
+            "url": "../Corazón de Bestia N'Trak Quemado.png",
+            "nombre": "Corazon de N'Trak",
+            "precio": 35.8
+        },
+        {
+            "id":"10",
+            "url": "../Pescado de Coral de Veta Azul (Seco).png",
+            "nombre": "Pescado de Coral",
+            "precio": 15.8
+        },
+        {
+            "id":"11",
+            "url": "../Pastel de Fermento de Menta (Methane Mint Patty).png",
+            "nombre": "Pastel de Menta",
+            "precio": 24.5
+        },
+        {
+            "id":"12",
+            "url": "../Bolas de Mucosa de T'kar.png",
+            "nombre": "Bolas de Mucosa de T'kar",
+            "precio": 20
+        },
+        {
+            "id":"13",
+            "url": "../Sopa de Algas Calientes (Hot Algae Slurry).png",
+            "nombre": "Sopa de Algas",
+            "precio": 11
+        },
+        {
+            "id":"14",
+            "url": "../Champiñón Hongo-Luminiscente Frito.png",
+            "nombre": "Hongo Luminiscente",
+            "precio": 15
+        },
+        {
+            "id":"15",
+            "url": "../Bebida de Polvo de Metano Purificado.png",
+            "nombre": "Bebida de Polvo de Metano",
+            "precio": 8
+        },
+        {
+            "id":"16",
+            "url": "../Nudillo de Bestia del Despojo.png",
+            "nombre": "Nudillos de Bestia",
+            "precio": 17
+        },
+        {
+            "id":"17",
+            "url": "../Brebaje de Furia (Rage Brew).png",
+            "nombre": "Brebaje de Furia",
+            "precio": 5
+        },
+        {
+            "id":"18",
+            "url": "../Grasa de Montaña con Corteza de Ceniza.png",
+            "nombre": "Grasa de Corteza",
+            "precio": 15
+        },
+        {
+            "id":"19",
+            "url": "../Guijarros de Proteína Cruda.png",
+            "nombre": "Guijarro de Preteína",
+            "precio": 7
+        },
+        {
+            "id":"20",
+            "url": "../Hueso de Bestia de Caída.png",
+            "nombre": "Hueso de Bestia",
+            "precio": 11
+        },
+        {
+            "id":"21",
+            "url": "../Sala-de-absorcion-metano.png",
+            "nombre": "Sala de Obsorción de Metano",
+            "precio": 250
+        },
+        {
+            "id":"22",
+            "url": "../Lodos Minerales del Cúmulo de Escombros.png",
+            "nombre": "Lodos Minerales de Cúmulo",
+            "precio": 50
+        },
+        {
+            "id":"23",
+            "url": "../Cristales de Refuerzo de la Armadura.png",
+            "nombre": "Cristales de Refuerzo",
+            "precio": 150
+        },
+        {
+            "id":"24",
+            "url": "../Flujo de Energía Residual de Plasma.png",
+            "nombre": "Flujo de Energía",
+            "precio": 310
+        },
+        {
+            "id":"25",
+            "url": "../Arena de Silicato Estructural.png",
+            "nombre": "Arena de Silicio",
+            "precio": 100
+        }
+    ]
+}
